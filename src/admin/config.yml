@@ -1,17 +1,24 @@
+# src/admin/config.yml
+
 backend:
-  name: git-gateway
+  name: github
+  repo: pppooolll/pppooolll-website
   branch: main
+  base_url: https://gregarious-strudel-5d510f.netlify.app
+  auth_endpoint: oauth
 
 media_folder: "src/assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/posts"
+  - name: "projects"
+    label: "Projects"
+    folder: "src/projects"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Type", name: "type", widget: "select", options: ["Built", "Unbuilt", "Documents"] }
+      - { label: "Cover Image", name: "thumbnail", widget: "image" }
+      - { label: "Description", name: "body", widget: "markdown" }
