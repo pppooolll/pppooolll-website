@@ -2,9 +2,44 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Content Manager</title>
-    <script src="https://unpkg.com/netlify-cms@^2.10.0/dist/netlify-cms.js"></script>
+    <title>pppooolll Studio CMS</title>
+    <!-- Decap CMS App bundle -->
+    <script src="https://unpkg.com/netlify-cms-app@^2.15.0/dist/netlify-cms-app.js"></script>
   </head>
   <body>
+    <div id="cms-root"></div>
+
+    <script>
+      // Manually initialize CMS with GitHub OAuth backend
+      CMS.init({
+        config: {
+          backend: {
+            name: "github",
+            repo: "pppooolll/pppooolll-website",
+            branch: "main",
+            auth_endpoint: "oauth",
+            base_url: window.location.origin
+          },
+          media_folder: "src/assets/images/uploads",
+          public_folder: "/assets/images/uploads",
+          collections: [
+            {
+              name: "projects",
+              label: "Projects",
+              folder: "src/projects",
+              create: true,
+              slug: "{{slug}}",
+              fields: [
+                { label: "Title", name: "title", widget: "string" },
+                { label: "Date", name: "date", widget: "datetime" },
+                { label: "Type", name: "type", widget: "select", options: ["Built", "Unbuilt", "Documents"] },
+                { label: "Cover Image", name: "thumbnail", widget: "image" },
+                { label: "Description", name: "body", widget: "markdown" }
+              ]
+            }
+          ]
+        }
+      });
+    </script>
   </body>
 </html>
